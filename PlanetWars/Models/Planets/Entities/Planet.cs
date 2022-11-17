@@ -12,7 +12,7 @@ using System.Text;
 
 namespace PlanetWars.Models.Planets.Entities
 {
-    public abstract class Planet : IPlanet
+    public class Planet : IPlanet
     {
         private string name;
         private double budget;
@@ -113,6 +113,7 @@ namespace PlanetWars.Models.Planets.Entities
         public string PlanetInfo()
         {
             var sb = new StringBuilder();
+
             sb.AppendLine(String.Format("Planet: {0}", this.Name));
             sb.AppendLine(String.Format("--Budget: {0} billion QUID", this.Budget));
             
