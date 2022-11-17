@@ -1,4 +1,5 @@
 ﻿using PlanetWars.Core.Contracts;
+using PlanetWars.Models.MilitaryUnits.Contracts;
 using PlanetWars.Models.Planets.Entities;
 using PlanetWars.Repositories.Entities;
 using System;
@@ -19,7 +20,38 @@ namespace PlanetWars.Core
 
         public string AddUnit(string unitTypeName, string planetName)
         {
-            throw new NotImplementedException();
+            if (this.planetRepository.Models.Any(o => o.Name == planetName))
+            {
+                if (unitTypeName != MilitaryUnitsTypes.AnonymousImpactUnit.ToString() || 
+                    unitTypeName != MilitaryUnitsTypes.StormTroopers.ToString() ||
+                    unitTypeName != MilitaryUnitsTypes.SpaceForces.ToString())
+                {
+                    throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.ItemNotAvailable, unitTypeName));
+                }
+                else
+                {
+                    var planet = this.planetRepository.Models.FirstOrDefault(o => o.Name == planetName);
+
+                    if (planet.Army.Any(o => o.GetType().Name == unitTypeName))
+                    {
+                        throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.UnitAlreadyAdded,
+                            unitTypeName, planetName));
+                    }else
+                    {
+                        switch (unitTypeName)
+                        {
+                            case "SpaceForces":
+
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.UnexistingPlanet, planetName));
+            }
         }
 
         public string AddWeapon(string planetName, string weaponTypeName, int destructionLevel)
