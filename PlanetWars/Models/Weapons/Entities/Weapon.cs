@@ -33,7 +33,7 @@ namespace PlanetWars.Models.Weapons.Entities
         public int DestructionLevel
         {
             get { return destructionLevel; }
-            private set { DestructionLevel = value; }
+            private set { this.destructionLevel = value; }
         }
 
     }

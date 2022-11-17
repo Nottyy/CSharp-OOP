@@ -6,6 +6,7 @@ using PlanetWars.Repositories.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 
@@ -15,7 +16,6 @@ namespace PlanetWars.Models.Planets.Entities
     {
         private string name;
         private double budget;
-        private double militaryPower;
         private WeaponRepository weaponRepository;
         private UnitRepository unitRepository;
 
@@ -62,12 +62,7 @@ namespace PlanetWars.Models.Planets.Entities
         {
             get
             {
-                return this.militaryPower;
-            }
-
-            private set
-            {
-                this.militaryPower = CalculateMilitaryPower(this.weaponRepository, this.unitRepository);
+                return this.CalculateMilitaryPower(this.weaponRepository, this.unitRepository);
             }
         }
 
@@ -76,7 +71,7 @@ namespace PlanetWars.Models.Planets.Entities
             double sum = weapons.Models.Sum(o => o.DestructionLevel) +
                                 army.Models.Sum(o => o.EnduranceLevel);
 
-            if (army.Models.Any(o => o.GetType().Name == "AnonymousImpactUnit")) ;
+            if (army.Models.Any(o => o.GetType().Name == "AnonymousImpactUnit"))
             {
                 sum = (sum * 0.3) + sum;
             }
@@ -117,12 +112,44 @@ namespace PlanetWars.Models.Planets.Entities
 
         public string PlanetInfo()
         {
-            throw new NotImplementedException();
+            var sb = new StringBuilder();
+            sb.AppendLine(String.Format("Planet: {0}", this.Name));
+            sb.AppendLine(String.Format("--Budget: {0} billion QUID", this.Budget));
+            
+            sb.AppendLine("--Forces: ");
+            if (this.unitRepository.Models.Count() > 0)
+            {
+                foreach (var item in this.unitRepository.Models)
+                {
+                    sb.Append(String.Format(", {0}", item.GetType().Name));
+                }
+            }
+            else
+            {
+                sb.Append(" No units");
+            }
+
+            sb.AppendLine("--Combat equipment: ");
+            if (this.weaponRepository.Models.Count() > 0)
+            {
+                foreach (var item in this.weaponRepository.Models)
+                {
+                    sb.Append(String.Format(", {0}", item.GetType().Name));
+                }
+            }
+            else
+            {
+                sb.Append(" No weapons");
+            }
+
+            sb.AppendLine(String.Format("--Military Power: {0}", this.MilitaryPower));
+
+            return sb.ToString();
         }
 
         public void Profit(double amount)
         {
-            throw new NotImplementedException();
+            this.Budget += amount;
         }
 
         public void Spend(double amount)
