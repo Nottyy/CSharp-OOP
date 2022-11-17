@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlanetWars.Models.Weapons
+namespace PlanetWars.Models.Weapons.Entities
 {
     public class SpaceMissiles : Weapon
     {

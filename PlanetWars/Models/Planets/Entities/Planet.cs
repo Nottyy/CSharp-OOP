@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlanetWars.Models.Planets
+namespace PlanetWars.Models.Planets.Entities
 {
     public abstract class Planet : IPlanet
     {

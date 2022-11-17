@@ -1,4 +1,4 @@
-﻿namespace PlanetWars.Models.MilitaryUnits
+﻿namespace PlanetWars.Models.MilitaryUnits.Entities
 {
     public class SpaceForces : MilitaryUnit
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlanetWars.Models.MilitaryUnits
+namespace PlanetWars.Models.MilitaryUnits.Entities
 {
     public abstract class MilitaryUnit : IMilitaryUnit
     {
@@ -14,29 +14,31 @@ namespace PlanetWars.Models.MilitaryUnits
 
         public MilitaryUnit(double cost)
         {
-            this.Cost = cost;
-            this.enduranceLevel = _initialValueEnduranceLevel;
+            Cost = cost;
+            enduranceLevel = _initialValueEnduranceLevel;
         }
-        public double Cost { 
-            get { return this.Cost; }
-            private set { this.cost = value; }
+        public double Cost
+        {
+            get { return Cost; }
+            private set { cost = value; }
         }
 
-        public int EnduranceLevel { 
-            get { return this.enduranceLevel; }
-            private set { this.enduranceLevel = value; }
+        public int EnduranceLevel
+        {
+            get { return enduranceLevel; }
+            private set { enduranceLevel = value; }
         }
 
         public void IncreaseEndurance()
         {
-            if (this.EnduranceLevel >= 20)
+            if (EnduranceLevel >= 20)
             {
-                this.EnduranceLevel = 20;
+                EnduranceLevel = 20;
                 throw new ArgumentException(Utilities.Messages.ExceptionMessages.EnduranceLevelExceeded);
             }
             else
             {
-                this.EnduranceLevel += _incrementEnduranceLevelPowerPoints;
+                EnduranceLevel += _incrementEnduranceLevelPowerPoints;
             }
         }
     }

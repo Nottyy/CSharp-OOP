@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PlanetWars.Models.Weapons
+namespace PlanetWars.Models.Weapons.Entities
 {
     public abstract class Weapon : IWeapon
     {
@@ -21,17 +21,19 @@ namespace PlanetWars.Models.Weapons
                 throw new ArgumentException(Utilities.Messages.ExceptionMessages.TooHighDestructionLevel);
             }
 
-            this.DestructionLevel = destructionLevel;
-            this.Price = price;
+            DestructionLevel = destructionLevel;
+            Price = price;
         }
-        public double Price { 
-            get { return this.price; }
-            private set { this.price = value; }
+        public double Price
+        {
+            get { return price; }
+            private set { price = value; }
         }
 
-        public int DestructionLevel {
-            get { return this.destructionLevel; }
-            private set { this.DestructionLevel = value; }
+        public int DestructionLevel
+        {
+            get { return destructionLevel; }
+            private set { DestructionLevel = value; }
         }
 
     }

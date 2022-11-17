@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PlanetWars.Repositories
+namespace PlanetWars.Repositories.Entities
 {
     public class WeaponRepository : IRepository<IWeapon>
     {
@@ -13,26 +13,27 @@ namespace PlanetWars.Repositories
 
         public WeaponRepository()
         {
-            this.weapons = new List<IWeapon>();
+            weapons = new List<IWeapon>();
         }
 
-        public IReadOnlyCollection<IWeapon> Models { 
-            get { return this.weapons; }
+        public IReadOnlyCollection<IWeapon> Models
+        {
+            get { return weapons; }
         }
 
         public void AddItem(IWeapon model)
         {
-            this.weapons.Add(model);
+            weapons.Add(model);
         }
 
         public IWeapon FindByName(string name)
         {
-            return this.weapons.FirstOrDefault(o => o.GetType().Name == name);
+            return weapons.FirstOrDefault(o => o.GetType().Name == name);
         }
 
         public bool RemoveItem(string name)
         {
-            return this.weapons.Remove(this.FindByName(name));
+            return weapons.Remove(FindByName(name));
         }
     }
 }
