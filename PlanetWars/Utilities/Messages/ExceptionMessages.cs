@@ -16,5 +16,7 @@
         public const string WeaponAlreadyAdded = "{0} already added to the Weapons of {1}!";
         public const string NoUnitsFound = "No units available for upgrade!";
         public const string WeaponAdded = "{0} purchased {1}!";
+        public const string CombatResult = "{0} destructed {1}!";
+        public const string NoCombatWinners = "The only winners from the war are the ones who supply the bullets and the bandages!";
     }
 }

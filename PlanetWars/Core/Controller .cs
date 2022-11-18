@@ -1,6 +1,7 @@
 ﻿using PlanetWars.Core.Contracts;
 using PlanetWars.Models.MilitaryUnits.Contracts;
 using PlanetWars.Models.MilitaryUnits.Entities;
+using PlanetWars.Models.Planets.Contracts;
 using PlanetWars.Models.Planets.Entities;
 using PlanetWars.Models.Weapons.Contracts;
 using PlanetWars.Models.Weapons.Entities;
@@ -8,6 +9,7 @@ using PlanetWars.Repositories.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 
 namespace PlanetWars.Core
@@ -128,7 +130,61 @@ namespace PlanetWars.Core
 
         public string SpaceCombat(string planetOne, string planetTwo)
         {
-            throw new NotImplementedException();
+            IPlanet planet1 = this.planetRepository.Models.FirstOrDefault(o => o.Name == planetOne);
+            IPlanet planet2 = this.planetRepository.Models.FirstOrDefault(o => o.Name == planetTwo);
+            IPlanet winner;
+            IPlanet loser;
+
+            if (planet1.MilitaryPower > planet2.MilitaryPower)
+            {
+                winner = planet1;
+                loser = planet2;
+            }
+            else if(planet1.MilitaryPower < planet2.MilitaryPower)
+            {
+                winner = planet2;
+                loser = planet1;
+            }
+            else
+            {
+                bool planet1HasNuclear = HasNuclearWeapon(planet1);
+                bool planet2HasNuclear = HasNuclearWeapon(planet2);
+
+                if ((planet1HasNuclear && planet2HasNuclear) || 
+                    (!planet1HasNuclear && !planet2HasNuclear))
+                {
+                    planet1.Spend(planet1.Budget / 2);
+                    planet2.Spend(planet2.Budget / 2);
+
+                    return Utilities.Messages.ExceptionMessages.NoCombatWinners;
+                }
+                else if (planet1HasNuclear && !planet2HasNuclear)
+                {
+                    winner = planet1;
+                    loser = planet2;
+                }
+                else(!planet1HasNuclear && planet2HasNuclear)
+                {
+                    winner = planet2;
+                    loser = planet1;
+                }
+            }
+
+            return SpaceCombatResult(winner, loser, planetRepository);
+        }
+
+        private bool HasNuclearWeapon(IPlanet planet)
+        {
+            return planet.Weapons.Any(o => o.GetType().Name == "NuclearWeapon") ? true : false;
+        }
+
+        private string SpaceCombatResult(IPlanet winner, IPlanet loser, PlanetRepository planets)
+        {
+            winner.Spend(winner.Budget / 2);
+            winner.Profit((loser.Budget / 2) + loser.Army.Sum(o => o.Cost) + loser.Weapons.Sum(o => o.Price));
+            planets.RemoveItem(loser.Name);
+
+            return String.Format(Utilities.Messages.ExceptionMessages.CombatResult, winner.Name, loser.Name);
         }
 
         public string SpecializeForces(string planetName)
