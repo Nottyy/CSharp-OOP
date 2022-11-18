@@ -14,13 +14,13 @@ namespace PlanetWars.Models.MilitaryUnits.Entities
 
         public MilitaryUnit(double cost)
         {
-            Cost = cost;
+            this.cost = cost;
             enduranceLevel = _initialValueEnduranceLevel;
         }
         public double Cost
         {
-            get { return Cost; }
-            private set { cost = value; }
+            get { return this.cost; }
+            private set { this.cost = value; }
         }
 
         public int EnduranceLevel

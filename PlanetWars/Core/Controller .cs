@@ -29,8 +29,8 @@ namespace PlanetWars.Core
 
             if (planet != null)
             {
-                if (unitTypeName != MilitaryUnitsTypes.AnonymousImpactUnit.ToString() || 
-                    unitTypeName != MilitaryUnitsTypes.StormTroopers.ToString() ||
+                if (unitTypeName != MilitaryUnitsTypes.AnonymousImpactUnit.ToString() && 
+                    unitTypeName != MilitaryUnitsTypes.StormTroopers.ToString() &&
                     unitTypeName != MilitaryUnitsTypes.SpaceForces.ToString())
                 {
                     throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.ItemNotAvailable, unitTypeName));
@@ -44,18 +44,23 @@ namespace PlanetWars.Core
                             unitTypeName, planetName));
                     }else
                     {
+                        IMilitaryUnit militaryUnit = new SpaceForces();
+
                         switch (unitTypeName)
                         {
                             case "AnonymousImpactUnit":
-                                planet.AddUnit(new AnonymousImpactUnit());
+                                militaryUnit = new AnonymousImpactUnit();
                                 break;
                             case "SpaceForces":
-                                planet.AddUnit(new SpaceForces());
+                                militaryUnit = new SpaceForces();
                                 break;
-                            case "StormTroopers":
-                                planet.AddUnit(new StormTroopers());
+                            default :
+                                militaryUnit = new StormTroopers();
                                 break;
                         }
+
+                        planet.Spend(militaryUnit.Cost);
+                        planet.AddUnit(militaryUnit);
 
                         return String.Format("{0} added successfully to the Army of {1}!", unitTypeName, planetName);
                     }
@@ -73,8 +78,8 @@ namespace PlanetWars.Core
 
             if (planet != null)
             {
-                if (weaponTypeName != WeaponTypes.NuclearWeapon.ToString() ||
-                    weaponTypeName != WeaponTypes.SpaceMissiles.ToString() ||
+                if (weaponTypeName != WeaponTypes.NuclearWeapon.ToString() &&
+                    weaponTypeName != WeaponTypes.SpaceMissiles.ToString() &&
                     weaponTypeName != WeaponTypes.BioChemicalWeapon.ToString())
                 {
                     throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.ItemNotAvailable, weaponTypeName));
@@ -87,18 +92,24 @@ namespace PlanetWars.Core
                     }
                     else
                     {
+                        IWeapon weapon;
                         switch (weaponTypeName)
                         {
                             case "NuclearWeapon":
-                                planet.AddWeapon(new NuclearWeapon(destructionLevel));
+                                weapon = new NuclearWeapon(destructionLevel);
                                 break;
+
                             case "BioChemicalWeapon":
-                                planet.AddWeapon(new BioChemicalWeapon(destructionLevel));
+                                weapon = new BioChemicalWeapon(destructionLevel);
                                 break;
-                            case "SpaceMissiles":
-                                planet.AddWeapon(new SpaceMissiles(destructionLevel));
+
+                            default:
+                                weapon = new SpaceMissiles(destructionLevel);
                                 break;
                         }
+
+                        planet.Spend(weapon.Price);
+                        planet.AddWeapon(weapon);
 
                         return String.Format(Utilities.Messages.ExceptionMessages.WeaponAdded, planetName, weaponTypeName);
                     }
@@ -125,7 +136,15 @@ namespace PlanetWars.Core
 
         public string ForcesReport()
         {
-            throw new NotImplementedException();
+            var sortedPlanets = this.planetRepository.Models.OrderByDescending(o => o.MilitaryPower).ThenByDescending(o => o.Name);
+            var sb = new StringBuilder();
+
+            foreach (var planet in sortedPlanets)
+            {
+                sb.AppendLine(planet.PlanetInfo());
+            }
+
+            return sb.ToString();
         }
 
         public string SpaceCombat(string planetOne, string planetTwo)
@@ -163,12 +182,14 @@ namespace PlanetWars.Core
                     winner = planet1;
                     loser = planet2;
                 }
-                else(!planet1HasNuclear && planet2HasNuclear)
+                else
                 {
                     winner = planet2;
                     loser = planet1;
                 }
             }
+
+            this.planetRepository.RemoveItem(loser.Name);
 
             return SpaceCombatResult(winner, loser, planetRepository);
         }
@@ -189,7 +210,30 @@ namespace PlanetWars.Core
 
         public string SpecializeForces(string planetName)
         {
-            throw new NotImplementedException();
+            var planet = this.planetRepository.Models.FirstOrDefault(o => o.Name == planetName);
+
+            if (planet == null)
+            {
+                throw new InvalidOperationException(String.Format(Utilities.Messages.ExceptionMessages.UnexistingPlanet, planetName));
+            }
+            else
+            {
+                if (planet.Army.Count == 0)
+                {
+                    throw new InvalidOperationException(Utilities.Messages.ExceptionMessages.NoUnitsFound);
+                }
+                else
+                {
+                    foreach (var militaryUnit in planet.Army)
+                    {
+                        militaryUnit.IncreaseEndurance();
+                    }
+
+                    planet.Spend(1.25);
+
+                    return String.Format(Utilities.Messages.ExceptionMessages.TrainArmySuccessful, planetName);
+                }
+            }
         }
     }
 }

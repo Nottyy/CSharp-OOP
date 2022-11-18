@@ -18,5 +18,6 @@
         public const string WeaponAdded = "{0} purchased {1}!";
         public const string CombatResult = "{0} destructed {1}!";
         public const string NoCombatWinners = "The only winners from the war are the ones who supply the bullets and the bandages!";
+        public const string TrainArmySuccessful = "{0} has upgraded its forces!";
     }
 }

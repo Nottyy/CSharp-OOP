@@ -76,7 +76,7 @@ namespace PlanetWars.Models.Planets.Entities
                 sum = (sum * 0.3) + sum;
             }
 
-            if (weapons.Models.Any(o => o.GetType().Name == "NuclearWeapon "))
+            if (weapons.Models.Any(o => o.GetType().Name == "NuclearWeapon"))
             {
                 sum = (sum * 0.45) + sum;
             }
@@ -117,25 +117,28 @@ namespace PlanetWars.Models.Planets.Entities
             sb.AppendLine(String.Format("Planet: {0}", this.Name));
             sb.AppendLine(String.Format("--Budget: {0} billion QUID", this.Budget));
             
-            sb.AppendLine("--Forces: ");
+            sb.Append("--Forces: ");
             if (this.unitRepository.Models.Count() > 0)
             {
                 foreach (var item in this.unitRepository.Models)
                 {
-                    sb.Append(String.Format(", {0}", item.GetType().Name));
+                    sb.Append(String.Format("{0}, ", item.GetType().Name));
                 }
+                
+                
             }
             else
             {
                 sb.Append(" No units");
             }
 
-            sb.AppendLine("--Combat equipment: ");
+            sb.AppendLine();
+            sb.Append("--Combat equipment: ");
             if (this.weaponRepository.Models.Count() > 0)
             {
                 foreach (var item in this.weaponRepository.Models)
                 {
-                    sb.Append(String.Format(", {0}", item.GetType().Name));
+                    sb.Append(String.Format("{0}, ", item.GetType().Name));
                 }
             }
             else
@@ -143,6 +146,8 @@ namespace PlanetWars.Models.Planets.Entities
                 sb.Append(" No weapons");
             }
 
+            sb.AppendLine();
+            var milPower = this.MilitaryPower;
             sb.AppendLine(String.Format("--Military Power: {0}", this.MilitaryPower));
 
             return sb.ToString();

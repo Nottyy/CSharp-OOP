@@ -13,27 +13,27 @@ namespace PlanetWars.Repositories.Entities
 
         public WeaponRepository()
         {
-            weapons = new List<IWeapon>();
+            this.weapons = new List<IWeapon>();
         }
 
         public IReadOnlyCollection<IWeapon> Models
         {
-            get { return weapons; }
+            get { return this.weapons; }
         }
 
         public void AddItem(IWeapon model)
         {
-            weapons.Add(model);
+            this.weapons.Add(model);
         }
 
         public IWeapon FindByName(string name)
         {
-            return weapons.FirstOrDefault(o => o.GetType().Name == name);
+            return this.weapons.FirstOrDefault(o => o.GetType().Name == name);
         }
 
         public bool RemoveItem(string name)
         {
-            return weapons.Remove(FindByName(name));
+            return this.weapons.Remove(FindByName(name));
         }
     }
 }
