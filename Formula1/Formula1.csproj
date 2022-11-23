@@ -58,6 +58,7 @@
     <Compile Include="Models\Entities - FormulaOneCar\FormulaOneCar.cs" />
     <Compile Include="Models\Entities - Pilot\Pilot.cs" />
     <Compile Include="Models\Entities - Race\Race.cs" />
+    <Compile Include="Repositories\FormulaOneCarRepository.cs" />
     <Compile Include="Repositories\RaceRepository.cs" />
     <Compile Include="Repositories\PilotRepository.cs" />
     <Compile Include="Startup.cs" />
