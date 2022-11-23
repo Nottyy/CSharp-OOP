@@ -2,13 +2,13 @@
 {
     public interface IPilot
     {
-        public string FullName { get; }
+        string FullName { get; }
 
-        public IFormulaOneCar Car { get; }
+        IFormulaOneCar Car { get; }
 
-        public int NumberOfWins { get;}
+        int NumberOfWins { get;}
 
-        public bool CanRace { get; }
+        bool CanRace { get; }
 
         void AddCar(IFormulaOneCar car);
 

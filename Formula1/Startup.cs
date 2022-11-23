@@ -1,5 +1,6 @@
 ﻿using Formula1.Core;
 using Formula1.Core.Contracts;
+using Formula1.Models.Entities;
 
 namespace Formula1
 {
@@ -7,8 +8,8 @@ namespace Formula1
     {
         static void Main(string[] args)
         {
-            Engine engine = new Engine();
-            engine.Run();
+            //Engine engine = new Engine();
+            //engine.Run();
         }
     }
 }

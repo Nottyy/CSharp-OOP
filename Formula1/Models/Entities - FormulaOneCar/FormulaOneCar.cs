@@ -50,10 +50,6 @@ namespace Formula1.Models.Entities
             {
                 return this.model;
             }
-            private set
-            {
-                this.model = value;
-            }
         }
 
         public int Horsepower
@@ -62,10 +58,6 @@ namespace Formula1.Models.Entities
             {
                 return this.horsepower;
             }
-            private set
-            {
-                this.horsepower = value;
-            }
         }
 
         public double EngineDisplacement
@@ -73,10 +65,6 @@ namespace Formula1.Models.Entities
             get
             {
                 return this.engineDisplacement;
-            }
-            private set
-            {
-                this.engineDisplacement = value;
             }
         }
 
