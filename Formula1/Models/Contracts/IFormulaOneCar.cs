@@ -2,11 +2,11 @@
 {
     public interface IFormulaOneCar
     {
-        public string Model { get; }
+        string Model { get; }
 
-        public int Horsepower { get; }
+        int Horsepower { get; }
 
-        public double EngineDisplacement { get; }
+        double EngineDisplacement { get; }
 
         double RaceScoreCalculator(int laps);
     }
