@@ -8,8 +8,8 @@ namespace Formula1
     {
         static void Main(string[] args)
         {
-            //Engine engine = new Engine();
-            //engine.Run();
+            Engine engine = new Engine();
+            engine.Run();
         }
     }
 }
