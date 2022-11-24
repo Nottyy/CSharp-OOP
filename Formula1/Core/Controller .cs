@@ -31,7 +31,12 @@ namespace Formula1.Core
         {
             var pilot = this.pilotRepository.FindByName(pilotName);
 
-            if (pilot == null || pilot.Car != null)
+            if (pilot == null)
+            {
+                throw new InvalidOperationException(String.Format(Utilities.ExceptionMessages.PilotDoesNotExistOrHasCarErrorMessage, pilotName));
+            }
+
+            if (pilot.Car != null)
             {
                 throw new InvalidOperationException(String.Format(Utilities.ExceptionMessages.PilotDoesNotExistOrHasCarErrorMessage, pilotName));
             }
@@ -100,6 +105,8 @@ namespace Formula1.Core
                 throw new InvalidOperationException(String.Format(Utilities.ExceptionMessages.InvalidTypeCar, type));
             }
 
+            this.formulaOneCarRepository.Add(newCar);
+
             return String.Format(Utilities.ExceptionMessages.CarCreated, type, model);
         }
 
@@ -107,7 +114,7 @@ namespace Formula1.Core
         {
             var pilot = this.pilotRepository.FindByName(fullName);
             
-            if (pilot == null)
+            if (pilot != null)
             {
                 throw new InvalidOperationException(String.Format(Utilities.ExceptionMessages.PilotExistErrorMessage, fullName));
             }

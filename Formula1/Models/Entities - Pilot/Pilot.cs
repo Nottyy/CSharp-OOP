@@ -39,10 +39,10 @@ namespace Formula1.Models.Entities___Pilot
         {
             get
             {
-                if (this.car == null)
-                {
-                    throw new NullReferenceException(Utilities.ExceptionMessages.InvalidCarForPilot);
-                }
+                //if (this.car == null)
+                //{
+                //    throw new NullReferenceException(Utilities.ExceptionMessages.InvalidCarForPilot);
+                //}
 
                 return this.car;
             }
