@@ -8,6 +8,7 @@
         public const string CarExistErrorMessage = "Formula one car {0} is already created.";
         public const string InvalidTypeCar = "Formula one car type {0} is not valid.";
         public const string CarDoesNotExistErrorMessage = "Car {0} does not exist.";
+        public const string CarCreated = "Car {0}, model {1} is created.";
 
         public const string InvalidPilot = "Invalid pilot name: {0}.";
         public const string InvalidCarForPilot = "Pilot car can not be null.";
@@ -15,6 +16,7 @@
         public const string PilotExistErrorMessage = "Pilot {0} is already created.";
         public const string PilotDoesNotExistErrorMessage = "Can not add pilot {0} to the race.";
         public const string PilotDoesNotExistOrHasCarErrorMessage = "Pilot {0} does not exist or has a car.";
+        public const string PilotCreated = "Pilot {0} is created.";
 
         public const string InvalidRaceName = "Invalid race name: {0}.";
         public const string InvalidLapNumbers = "Invalid lap numbers: {0}.";

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Controller .cs" />
     <Compile Include="Core\Contracts\IController.cs" />
     <Compile Include="Core\Contracts\IEngine.cs" />
     <Compile Include="Core\Engine.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="IO\Contracts\IWriter.cs" />
     <Compile Include="IO\Reader.cs" />
     <Compile Include="IO\Writer.cs" />
+    <Compile Include="Models\Contracts\FormulaOneCars.cs" />
     <Compile Include="Models\Contracts\IFormulaOneCar.cs" />
     <Compile Include="Models\Contracts\IPilot.cs" />
     <Compile Include="Models\Contracts\IRace.cs" />
