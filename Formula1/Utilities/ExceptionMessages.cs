@@ -17,6 +17,7 @@
         public const string PilotDoesNotExistErrorMessage = "Can not add pilot {0} to the race.";
         public const string PilotDoesNotExistOrHasCarErrorMessage = "Pilot {0} does not exist or has a car.";
         public const string PilotCreated = "Pilot {0} is created.";
+        public const string CarAddedToPilot = "Pilot {0} will drive a {1} {2} car.";
 
         public const string InvalidRaceName = "Invalid race name: {0}.";
         public const string InvalidLapNumbers = "Invalid lap numbers: {0}.";
@@ -24,6 +25,7 @@
         public const string RaceDoesNotExistErrorMessage = "Race {0} does not exist.";
         public const string InvalidRaceParticipants = "Race {0} cannot start with less than three participants.";
         public const string RaceTookPlaceErrorMessage = "Can not execute race {0}.";
+        public const string RaceCreated = "Race {0} is created.";
 
     }
 }
