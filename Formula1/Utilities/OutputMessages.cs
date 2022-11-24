@@ -10,5 +10,6 @@
         public const string PilotFirstPlace = "Pilot {0} wins the {1} race.";
         public const string PilotSecondPlace = "Pilot {0} is second in the {1} race.";
         public const string PilotThirdPlace = "Pilot {0} is third in the {1} race.";
+        public const string PilotWins = "Pilot {0} has {1} wins.";
     }
 }

@@ -74,5 +74,10 @@ namespace Formula1.Models.Entities___Pilot
         {
             this.numberOfWins += 1;
         }
+
+        public override string ToString()
+        {
+            return String.Format(Utilities.OutputMessages.PilotWins, this.fullName, this.numberOfWins);
+        }
     }
 }
