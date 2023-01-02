@@ -50,6 +50,20 @@ namespace Queue
 
         public int Size => this.size;
 
+        public void printQueue()
+        {
+            var newBuffer = new T[buffer.Length];
+            var sb = new StringBuilder();
+
+            for (int i = 0, j = startIndex; i < size; i++, j = this.NextIndex(j))
+            {
+                newBuffer[i] = buffer[j];
+                sb.Append($" {newBuffer[i]}");
+            }
+
+            Console.WriteLine(sb);
+        }
+
         private int NextIndex(int index)
         {
             index++;

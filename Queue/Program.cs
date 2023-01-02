@@ -12,14 +12,35 @@ namespace Queue
         {
             var st = new ArrQueue<int>();
             st.Push(5);
+            st.printQueue();
+
             st.Push(4);
+            st.printQueue();
+
             st.Pop();
+            st.printQueue();
+
             st.Pop();
+            st.printQueue();
+
             st.Push(3);
+            st.printQueue();
+
             st.Push(2);
+            st.printQueue();
+
             st.Push(1);
+            st.printQueue();
+
             st.Push(11);
-            st.Push(11);
+            st.printQueue();
+
+            st.Push(44);
+            st.printQueue();
+
+            st.Pop();
+            st.printQueue();
+
         }
     }
 }
