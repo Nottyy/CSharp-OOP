@@ -34,7 +34,6 @@ namespace Stack
 
         public T Peek()
         {
-            int s = 4;
             return this.First.Value;
         }
 
